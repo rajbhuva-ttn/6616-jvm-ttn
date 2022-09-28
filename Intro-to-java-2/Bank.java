@@ -1,4 +1,5 @@
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -8,8 +9,7 @@ import java.time.LocalDateTime;
 
 import java.util.*;
 
-import static java.nio.file.StandardOpenOption.APPEND;
-import static java.nio.file.StandardOpenOption.CREATE;
+import static java.nio.file.StandardOpenOption.*;
 
 public abstract class Bank {
     enum acType {
@@ -38,7 +38,6 @@ public abstract class Bank {
         count++;
         path = "./"+this.getClass().getName()+".txt";
 
-
     }
 
     abstract void getDetails();
@@ -47,19 +46,29 @@ public abstract class Bank {
 
 //    protected boolean failure;
 
-    public void withdrawn(double amount) throws InsufficientAmountException {
+    public void withdrawn(double amount) {
 
         LocalDateTime now = LocalDateTime.now();
         if (amount > balance) {
 
-            Bank.saveData("Bank Name : "+this.getClass().getName()+"\nAcNumber : "+this.acNumber+"\nTime ="+now+"\namount withdrawn:"+amount+"\nBalance :"+balance+"T\nTransaction Failed\nReason : Insufficient Balance\n\n");
-            throw new InsufficientAmountException("Inefficient Balance!!!");
+            try{
+                Bank.saveData("Bank Name : "+this.getClass().getName()+"\nAcNumber : "+this.acNumber+"\nName :"+name+"\nTime ="+now+"\namount withdrawn:"+amount+"\nBalance :"+balance+"T\nTransaction Failed\nReason : Insufficient Balance\n\n");
+
+                throw new InsufficientAmountException("Inefficient Balance!!!\n");
+
+            }
+            catch(InsufficientAmountException e) {
+                System.out.println(e.getMessage());
+            }
         }
+        else {
 
-        Bank.saveData("Bank Name : "+this.getClass().getName()+"\nAcNumber : "+this.acNumber+"\nTime ="+now+"\nBalance before deduction: "+balance+"\nAmount withdrawn :"+amount+"\nCurrent Balance:"+(balance-amount)+"\nTransaction Successful\n\n");
-        balance = balance - amount;
 
-        System.out.println("Withdrawn Sucessful");
+            Bank.saveData("Bank Name : " + this.getClass().getName() + "\nAcNumber : " + this.acNumber+"\nName :"+name+"\nTime =" + now + "\nBalance before deduction: " + balance + "\nAmount withdrawn :" + amount + "\nCurrent Balance:" + (balance - amount) + "\nTransaction Successful\n\n");
+            balance = balance - amount;
+
+            System.out.println("Withdrawn Successful\n");
+        }
     }
 
     public static void saveData(String data) {
@@ -73,10 +82,10 @@ public abstract class Bank {
 
     }
 }
-class InsufficientAmountException extends RuntimeException {
+class InsufficientAmountException extends Exception {
     String s;
     public InsufficientAmountException(String s) {
-        this.s = s;
+        super(s);
     }
 }
 
