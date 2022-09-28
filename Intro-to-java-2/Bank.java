@@ -8,16 +8,17 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 
 public abstract class Bank {
-    enum acType{
+    enum acType {
         SAVING("Saving"),
         CURRENT("Current");
 
         String name;
 
-        acType(String name){
-            this.name =name;
+        acType(String name) {
+            this.name = name;
         }
     }
+
     private double balance;
     private double amount;
     protected String name;
@@ -34,39 +35,31 @@ public abstract class Bank {
     abstract void getDetails();
 
     abstract void printDetails();
+
     protected boolean failure;
-    public void withdrawn(double amount) throws InsufficientAmountException{
+
+    public void withdrawn(double amount) throws InsufficientAmountException {
 
 
-        if (amount>balance) {
-                failure = true;
-                Bank.saveData("Transaction failed");
-                throw new InsufficientAmountException("Inefficient Balance!!!");
+        if (amount > balance) {
+            failure = true;
+            Bank.saveData("Transaction failed");
+            throw new InsufficientAmountException("Inefficient Balance!!!");
         }
+        Bank.saveData("Transaction Successful");
         balance = balance - amount;
 
         System.out.println(balance);
     }
-    public static void saveData(String filePath, String text) {
-//        Path path = Paths.get("./saveData.txt");
-//        try {
-//            Files.writeString(path, data, StandardCharsets.UTF_8);
-//            a
-//        } catch (IOException e) {
-//            System.out.println("INVALID PATH");
-//        }
-        File file = new File("append.txt");
-        FileWriter fr = new FileWriter(file, true);
-        fr.write("data");
-        fr.close();
+
+    public static void saveData(String data) {
+        Path path = Paths.get("./saveData.txt");
         try {
-            // to append to file, you need to initialize FileWriter using below constructor
-            fr = new FileWriter(file, true);
-            br = new BufferedWriter(fr);
-            pr = new PrintWriter(br);
-            pr.println(text);
+            Files.writeString(path, data, StandardCharsets.UTF_8);
+
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("INVALID PATH");
+        }
 
     }
 }

@@ -4,6 +4,6 @@ public class BankingSystem {
         Bank b1 = new ICICI("Raj Bhuva", Bank.acType.SAVING,5000);
         b1.getDetails();
         b1.printDetails();
-        b1.withdrawn(6000);
+        b1.withdrawn(4000);
     }
 }
