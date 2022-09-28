@@ -15,4 +15,5 @@ public class BOI extends Bank{
 
         System.out.println(this.name+" has "+this.accountType+" account in BOI bank.");
     }
+
 }
