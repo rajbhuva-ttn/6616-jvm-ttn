@@ -29,6 +29,7 @@ public class Example2 {
         Collections.sort(listEmployees, new Comparator<Employee>() {
                     @Override
                     public int compare(Employee e1, Employee e2) {
+
                         return e1.Salary.compareTo(e2.Salary);
                     }
                 }
