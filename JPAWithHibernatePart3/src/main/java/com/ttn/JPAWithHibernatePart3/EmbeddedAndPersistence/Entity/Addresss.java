@@ -2,20 +2,16 @@ package com.ttn.JPAWithHibernatePart3.EmbeddedAndPersistence.Entity;
 
 import javax.persistence.Embeddable;
 
-/*** Craeated an Address class and made it Embeddable using annotation ***/
 @Embeddable
 public class Addresss {
-  /*** Required fields inside the class ***/
   private Integer streetNumber;
   private String location;
   private String street;
 
-  /*** Constructor here **/
   public Addresss() {
 
   }
 
-  /*** getter and setter methods below ***/
 
   public Integer getStreetNumber() {
     return streetNumber;

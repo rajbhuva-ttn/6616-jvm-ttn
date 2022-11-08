@@ -1,21 +1,17 @@
 package com.ttn.JPAWithHibernatePart3.OneToOneMapping.Entity;
 import javax.persistence.Embeddable;
 
-/** Created an Address class and made it Embeddable using the annotation ***/
 @Embeddable
 public class Address {
 
-  /** Some required fields in Address class **/
   private Integer streetNumber;
   private String location;
   private String street;
 
-  /*** constructor here ***/
   public Address() {
 
   }
 
-  /** getter and setter methods below ***/
 
   public Integer getStreetNumber() {
     return streetNumber;

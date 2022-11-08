@@ -22,13 +22,11 @@ public class BookOneToOne {
   @Column(name = "book_name")
   private String bookName;
 
-  /*** Provided the details for OneToOne mapping here ***/
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "author_id")
   @JsonBackReference
   private AuthorOneToOne author;
 
-  /*** Constructor, getters and setters here ***/
   public BookOneToOne() {
 
   }

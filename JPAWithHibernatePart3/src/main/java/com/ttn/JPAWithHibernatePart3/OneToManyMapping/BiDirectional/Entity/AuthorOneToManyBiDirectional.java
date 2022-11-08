@@ -4,11 +4,9 @@ import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-/*** Created an Entity for Author here and provided its table name ***/
 @Entity
 @Table(name = "author_one_to_many_bidirectional")
 public class AuthorOneToManyBiDirectional {
-    /*** Created some fields for Author entity and provided their column names respectively **/
     @Id
     @Column(name = "author_id")
     private Long authorId;
@@ -30,23 +28,19 @@ public class AuthorOneToManyBiDirectional {
     })
     AddressOneToManyBiDirectional address;
 
-    /*** Provided details for OnetToMapping here ***/
-    @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
+   @OneToMany(mappedBy = "author", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<BookOneToManyBiDirectional> books = new ArrayList<BookOneToManyBiDirectional>();
 
-    /** Method to add the book in the list and set its author ***/
     public void addBook(BookOneToManyBiDirectional book){
         books.add(book);
         book.setAuthor(this);
     }
 
-    /*** Method to remove the book from the list and set the author to null **/
     public void removeBook(BookOneToManyBiDirectional book){
         books.remove(book);
         book.setAuthor(null);
     }
 
-    /*** getters and setters below **/
 
     public List<BookOneToManyBiDirectional> getBooks() {
         return books;

@@ -35,7 +35,6 @@ class JpaWithHibernatePart3Tests {
     void contextLoads() {
     }
 
-    /*** Testing method for Question no. 4 ***/
     @Test
     void testPersistence() {
         Author author = new Author();
@@ -57,7 +56,6 @@ class JpaWithHibernatePart3Tests {
         embeddedAuthorRepository.save(author);
     }
 
-    /*** Testing method for Question no. 8 ***/
     @Test
     void testManyToManyMapping() {
         AuthorManyToMany author = new AuthorManyToMany();
@@ -90,7 +88,6 @@ class JpaWithHibernatePart3Tests {
         authorRepository.save(author);
     }
 
-    /*** Testing method for Question no. 7 UniDirectional package ***/
     @Test
     void testOneToManyUniDirectional() {
         AuthorOneToManyUniDirectional author = new AuthorOneToManyUniDirectional();
@@ -120,7 +117,6 @@ class JpaWithHibernatePart3Tests {
         authorOneToManyRepositoryUniDirectional.save(author);
     }
 
-    /*** Testing method for Question no. 7 BiDirectional package ***/
     @Test
     void testOneToManyBiDirectional() {
         AuthorOneToManyBiDirectional author = new AuthorOneToManyBiDirectional();

@@ -20,7 +20,6 @@ import javax.validation.constraints.Size;
 @Table(name = "authors")
 public class Author implements Serializable {
 
-  /*** Solution 3 : Created a List of Subject here **/
   @ElementCollection(fetch = FetchType.LAZY)
   @AttributeOverrides({
       @AttributeOverride(name = "subjectName", column = @Column(name = "subjectList"))
@@ -28,7 +27,6 @@ public class Author implements Serializable {
   @Size(min = 3)
   List<Subject> subjectList = new ArrayList<Subject>();
 
-  /*** Some required fields of the Author class and their column names ***/
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer authorId;
@@ -42,7 +40,6 @@ public class Author implements Serializable {
   @Column(name = "author_gender")
   private String gender;
 
-  /*** Made an Embedded object of Address class and provided column names for its fields ***/
   @Embedded
   @AttributeOverrides({
       @AttributeOverride(name = "streetNumber", column = @Column(name = "author_street_number")),
@@ -51,12 +48,10 @@ public class Author implements Serializable {
   })
   private Addresss address;
 
-  /** Constructor here **/
   public Author() {
 
   }
 
-  /*** getters and setters methods below **/
 
   public Integer getAuthorId() {
     return authorId;

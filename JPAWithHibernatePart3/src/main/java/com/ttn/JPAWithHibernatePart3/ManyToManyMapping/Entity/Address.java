@@ -4,12 +4,10 @@ import javax.persistence.Embeddable;
 
 @Embeddable
 public class Address {
-    /*** Some required fields in the Address class ***/
     private Integer streetNumber;
     private String location;
     private String street;
 
-    /*** Constructor, getters and setters below ***/
     public Address(){
 
     }

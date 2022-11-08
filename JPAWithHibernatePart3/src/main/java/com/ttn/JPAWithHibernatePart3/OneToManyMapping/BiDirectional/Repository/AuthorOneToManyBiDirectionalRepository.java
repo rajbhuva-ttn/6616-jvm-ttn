@@ -4,7 +4,6 @@ import com.ttn.JPAWithHibernatePart3.OneToManyMapping.BiDirectional.Entity.Autho
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-/*** Created a repository for Author ***/
 @Repository
 public interface AuthorOneToManyBiDirectionalRepository extends JpaRepository<AuthorOneToManyBiDirectional,Long> {
 }

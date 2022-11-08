@@ -4,12 +4,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/*** Created the Entity for book and provided its table name ***/
 @Entity
 @Table(name = "book_many_to_many")
 public class BookManyToMany {
 
-    /*** Some fields for the Book entity and their respective column names ***/
     @Id
     @Column(name = "book_id")
     private Long book_id;
@@ -17,11 +15,9 @@ public class BookManyToMany {
     @Column(name = "book_name")
     private String book_name;
 
-    /*** Provided the details for ManyToMany mapping here ***/
     @ManyToMany(mappedBy = "books", cascade = {CascadeType.ALL})
     private Set<AuthorManyToMany> authors = new HashSet<AuthorManyToMany>();
 
-    /*** getters and setters below ***/
     public Long getBook_id() {
         return book_id;
     }

@@ -1,15 +1,12 @@
 package com.ttn.JPAWithHibernatePart3.OneToManyMapping.UniDirectional.Entity;
 import javax.persistence.Embeddable;
 
-/*** Created an Embeddable class for Address **/
 @Embeddable
 public class AddressOneToManyUniDirectional {
-    /*** Provided fields for the Address class **/
     private Integer streetNumber;
     private String location;
     private String street;
 
-    /*** Constructor, getters and setters below ***/
     public AddressOneToManyUniDirectional(){
 
     }

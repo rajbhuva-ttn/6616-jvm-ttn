@@ -13,11 +13,9 @@ import javax.persistence.Id;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-/*** Created an Entity of Author here and passed its table name by using @Table annotation ***/
 @Entity
 @Table(name = "author_one_to_one")
 public class AuthorOneToOne {
-  /*** Some required fields of Author class and their column names ***/
   @Id
   @GeneratedValue(strategy = GenerationType.AUTO)
   private Integer authorId;
@@ -39,13 +37,10 @@ public class AuthorOneToOne {
   })
   private Address address;
 
-  /*** Provided the OneToOne mapping here ***/
-  /*** It is being mapped by the author in the BookOneToOne class ***/
   @OneToOne(cascade = CascadeType.ALL, mappedBy = "author")
   @JsonManagedReference
   private BookOneToOne book;
 
-  /*** Constructor, getters and setters below ***/
   public AuthorOneToOne() {
 
   }

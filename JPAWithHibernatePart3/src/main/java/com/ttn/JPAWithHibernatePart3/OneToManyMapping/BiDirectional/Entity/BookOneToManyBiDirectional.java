@@ -2,11 +2,9 @@ package com.ttn.JPAWithHibernatePart3.OneToManyMapping.BiDirectional.Entity;
 
 import javax.persistence.*;
 
-/*** Created an Entity for Book and provided its table name ***/
 @Entity
 @Table(name = "book_one_to_many_bidirectional")
 public class BookOneToManyBiDirectional {
-    /*** Provided some fields for the book entity and provided their column names respectively **/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "book_id")
@@ -23,11 +21,9 @@ public class BookOneToManyBiDirectional {
         this.author = author;
     }
 
-    /*** Provided details for ManyToOne mapping **/
     @ManyToOne(fetch = FetchType.LAZY)
     private AuthorOneToManyBiDirectional author;
 
-    /*** Constructor, getters and setters below ***/
     public BookOneToManyBiDirectional(){
 
     }

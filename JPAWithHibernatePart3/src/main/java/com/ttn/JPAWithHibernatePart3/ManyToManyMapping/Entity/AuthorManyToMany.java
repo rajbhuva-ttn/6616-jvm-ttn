@@ -4,12 +4,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/** Created an Entity for Author here and provided its table name ***/
 @Entity
 @Table(name = "author_many_to_many")
 public class AuthorManyToMany {
 
-    /*** Created some fields for Author Entity and provided their column names ***/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "author_id")
@@ -32,8 +30,7 @@ public class AuthorManyToMany {
     })
     private Address author_address;
 
-    /*** Provided ManyToMany mapping here ***/
-    @ManyToMany(cascade = CascadeType.ALL)
+   @ManyToMany(cascade = CascadeType.ALL)
     @JoinTable(
             name = "authors_books",
             joinColumns = {
@@ -45,7 +42,6 @@ public class AuthorManyToMany {
     )
     Set<BookManyToMany> books = new HashSet<BookManyToMany>();
 
-    /** Constructor, getters and setters here ***/
     public AuthorManyToMany(){
 
     }

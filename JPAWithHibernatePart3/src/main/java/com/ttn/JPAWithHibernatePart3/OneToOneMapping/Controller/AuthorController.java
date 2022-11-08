@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-/*** Created a Rest Controller here for some required mappings ***/
 @RestController
 @RequestMapping(value = "/author")
 public class AuthorController {
@@ -18,7 +17,6 @@ public class AuthorController {
   @Autowired
   private AuthorService authorService;
 
-  /*** Mapping to save author in the database ***/
   @RequestMapping(value = "/saveauthor", method = RequestMethod.POST)
   @ResponseBody
   public AuthorOneToOne saveAuthor(@RequestBody AuthorOneToOne author) {
@@ -26,7 +24,6 @@ public class AuthorController {
     return authorResponse;
   }
 
-  /*** Mapping to get Author details by the id passed in the url ***/
   @RequestMapping(value = "/{authorId}", method = RequestMethod.GET)
   @ResponseBody
   public AuthorOneToOne getAuthorDetails(@PathVariable int authorId) {

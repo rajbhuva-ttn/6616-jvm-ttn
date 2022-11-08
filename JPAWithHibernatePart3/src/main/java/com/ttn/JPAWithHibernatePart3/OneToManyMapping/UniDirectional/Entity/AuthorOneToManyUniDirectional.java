@@ -4,12 +4,10 @@ import javax.persistence.*;
 import java.util.HashSet;
 import java.util.Set;
 
-/*** Created Author Entity here and provided its table name ***/
 @Entity
 @Table(name = "author_one_to_many_unidirectional")
 public class AuthorOneToManyUniDirectional {
 
-    /*** Created some fields for Author entity and their column names respectively ***/
     @Id
     @Column(name = "author_id")
     private Long authorId;
@@ -31,17 +29,14 @@ public class AuthorOneToManyUniDirectional {
     })
     AddressOneToManyUniDirectional address;
 
-    /*** Provided OneToMany mapping here **/
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true)
     @JoinColumn(name = "author_id")
     private Set<BookOneToManyUniDirectional> books = new HashSet<BookOneToManyUniDirectional>();
 
-    /*** Constructor below ***/
     public AuthorOneToManyUniDirectional(){
 
     }
 
-    /*** getters and setters methods below ***/
     public Set<BookOneToManyUniDirectional> getBooks() {
         return books;
     }

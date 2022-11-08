@@ -12,7 +12,6 @@ public class AuthorServiceImpl implements AuthorService {
   @Autowired
   private AuthorRepository authorRepository;
 
-  /*** Method to save the author in the database ***/
   public AuthorOneToOne saveAuthor(AuthorOneToOne author) {
     BookOneToOne book = author.getBook();
     book.setAuthor(author);
@@ -20,7 +19,6 @@ public class AuthorServiceImpl implements AuthorService {
     return author;
   }
 
-  /*** Method to retrieve author by the id passed in as a parameter ***/
   public AuthorOneToOne findAuthorByAuthorId(int authorId) {
     AuthorOneToOne author = authorRepository.findAuthorByAuthorId(authorId);
     return author;

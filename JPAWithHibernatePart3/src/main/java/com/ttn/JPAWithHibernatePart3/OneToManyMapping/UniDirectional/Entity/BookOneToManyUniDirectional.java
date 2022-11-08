@@ -2,11 +2,9 @@ package com.ttn.JPAWithHibernatePart3.OneToManyMapping.UniDirectional.Entity;
 
 import javax.persistence.*;
 
-/*** Created an entity for Book here and provided its table name ***/
 @Entity
 @Table(name = "book_one_to_many_unidirectional")
 public class BookOneToManyUniDirectional {
-    /*** Created some fields and provided their column names **/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "book_id")
@@ -15,12 +13,10 @@ public class BookOneToManyUniDirectional {
     @Column(name = "book_name")
     private String bookName;
 
-    /*** Constructor here **/
     public BookOneToManyUniDirectional(){
 
     }
 
-    /*** getters and setters here ***/
     public Long getBookId() {
         return bookId;
     }
