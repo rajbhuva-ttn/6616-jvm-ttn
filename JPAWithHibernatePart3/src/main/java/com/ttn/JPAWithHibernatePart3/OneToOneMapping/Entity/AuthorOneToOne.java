@@ -38,7 +38,7 @@ public class AuthorOneToOne {
   private Address address;
 
   @OneToOne(cascade = CascadeType.ALL, mappedBy = "author")
-  @JsonManagedReference
+//  @JsonManagedReference
   private BookOneToOne book;
 
   public AuthorOneToOne() {

@@ -24,7 +24,7 @@ public class BookOneToOne {
 
   @OneToOne(cascade = CascadeType.ALL)
   @JoinColumn(name = "author_id")
-  @JsonBackReference
+//  @JsonBackReference
   private AuthorOneToOne author;
 
   public BookOneToOne() {
