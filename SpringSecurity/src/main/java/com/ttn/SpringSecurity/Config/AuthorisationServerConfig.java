@@ -1,6 +1,8 @@
 package com.ttn.SpringSecurity.Config;
 
+import org.aspectj.lang.annotation.SuppressAjWarnings;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -9,31 +11,60 @@ import org.springframework.security.oauth2.config.annotation.configurers.ClientD
 import org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;
 import org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
+import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
 
 @Configuration
 @EnableAuthorizationServer
 public class AuthorisationServerConfig extends AuthorizationServerConfigurerAdapter {
-    private static final String RESOURCE_ID = "springsecurity";
 
     @Autowired
-    private AuthenticationManager authenticationManager;
-    @Autowired
-    private UserDetailsService userDetailsService;
+    PasswordEncoder passwordEncoder;
 
     @Autowired
-    private PasswordEncoder passwordEncoder;
+    AuthenticationManager authenticationManager;
+
+    @Autowired
+    UserDetailsService userDetailsService;
 
     @Override
-    public void configure(AuthorizationServerEndpointsConfigurer endpoints) throws Exception {
-        endpoints.tokenStore(new InMemoryTokenStore()).authenticationManager(authenticationManager)
-                .userDetailsService(userDetailsService);
+    public void configure(final AuthorizationServerEndpointsConfigurer endpoints) {
+        endpoints.tokenStore(tokenStore()).userDetailsService(userDetailsService)
+                .authenticationManager(authenticationManager)
+//                .accessTokenConverter(accessTokenConverter())
+        ;
+
+    }
+
+//    @Bean
+//    JwtAccessTokenConverter accessTokenConverter(){
+//        JwtAccessTokenConverter jwtAccessTokenConverter = new JwtAccessTokenConverter();
+//        jwtAccessTokenConverter.setSigningKey("1234");
+//        return jwtAccessTokenConverter;
+//    }
+
+    @Bean
+    public TokenStore tokenStore() {
+        return new InMemoryTokenStore();
+//        return new JwtTokenStore(accessTokenConverter());
     }
 
     @Override
-    public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-        clients.inMemory().withClient("productclientapp").secret(passwordEncoder.encode("0000"))
-                .authorizedGrantTypes("password", "refresh_token").scopes("read", "write")
-                .resourceIds(RESOURCE_ID);
+    public void configure(final ClientDetailsServiceConfigurer clients) throws Exception {
+        clients.inMemory()
+                .withClient("live-test")
+                .secret(passwordEncoder.encode("abcde"))
+                .authorizedGrantTypes("password","refresh_token")
+                .refreshTokenValiditySeconds(30 * 24 * 3600)
+                .scopes("app")
+                .accessTokenValiditySeconds(7*24*60);
     }
+
+    @Override
+    public void configure(AuthorizationServerSecurityConfigurer authorizationServerSecurityConfigurer) throws Exception {
+        authorizationServerSecurityConfigurer.allowFormAuthenticationForClients();
+    }
+
+
 }
